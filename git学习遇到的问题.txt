@@ -1,0 +1,18 @@
+warning: LF will be replaced by CRLF in 
+
+
+
+原因是存在符号转义问题
+
+
+
+windows中的换行符为 CRLF， 而在linux下的换行符为LF，所以在执行add . 时出现提示，解决办法：
+
+
+
+git config --global core.autocrlf false
+--------------------- 
+作者：Am星星 
+来源：CSDN 
+原文：https://blog.csdn.net/csdn799316120/article/details/79565579 
+版权声明：本文为博主原创文章，转载请附上博文链接！
