@@ -1,0 +1,32 @@
+ubuntu 安装mysql遇到的问题及解决办法；
+
+ 远程连接问题
+ 1、开放端口号
+	IPtables -I INPUT -p tcp --dport 3306 -j ACCEPT;
+
+ 2、给root用户授权
+
+	在本机先使用root用户登录mysql： mysql -u root -p"youpassword" 进行授权操作：
+
+	mysql>GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'youpassword' WITH GRANT OPTION;
+
+	重载授权表：FLUSH PRIVILEGES;
+
+	退出mysql数据库：exit
+
+3、注释mysqld.cnf 文件
+	进入目录“etc/mysql/mysql.conf.d/”，
+	sudo vim mysqld.cnf，
+	注释 bind-address = 127.0.0.1
+	# bind-address = 127.0.0.1
+
+4、连接Mysql报错：Client does not support authentication protocol requested by server；
+	命令如下：
+
+1、use mysql;
+
+2、alter user 'root'@'localhost' identified with mysql_native_password by '********';
+   或者
+   alter user 'root'@'%' identified with mysql_native_password by '********';
+
+3、flush privileges;
